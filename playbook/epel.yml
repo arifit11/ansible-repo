@@ -1,5 +1,6 @@
 ---
   - hosts: all
+    become: true
     tasks:
      - name : install epl LB
        yum : name=epel-release state=present update_cache=yes
