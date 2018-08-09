@@ -1,0 +1,13 @@
+---
+  - hosts: webserver
+    become: true
+    tasks:
+      - name: Install web-server
+        yum: name={{item}} state=present update_cache=yes
+        with_items:
+          - httpd
+          - python-pip
+          - mod_wsgi
+
+      - name : ensure web webserver started
+        service : name=httpd state=started enabled=yes

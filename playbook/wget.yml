@@ -1,0 +1,6 @@
+---
+  - hosts: all
+    become: true
+    tasks:
+     - name: install wget
+       yum: name=wget state=installed update_cache=yes
