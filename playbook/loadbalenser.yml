@@ -1,6 +1,9 @@
 ---
   - hosts: loadbalancer
-    become: true
+    become: tue
     tasks:
      - name : install nginx LB
        yum : name=nginx state=present update_cache=yes
+
+     - name : ensure nginx started
+       service : name=nginx state=started enabled=yes
