@@ -1,0 +1,5 @@
+---
+  - hosts: loadbalancer
+    tasks:
+     - name : install nginx LB
+       yum : name=nginx state=present update_cache=yes

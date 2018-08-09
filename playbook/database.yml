@@ -1,0 +1,8 @@
+---
+  - hosts: database
+    tasks:
+      - name: install Mysql DB
+        yum:
+          name: mysql*
+          state: present
+          update_cache: yes
