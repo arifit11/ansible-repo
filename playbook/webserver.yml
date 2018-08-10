@@ -9,5 +9,13 @@
           - python-pip
           - mod_wsgi
 
-      - name : ensure web webserver started
-        service : name=httpd state=started enabled=yes
+      - name: ensure web webserver started
+        service: name=httpd state=started enabled=yes
+
+      - name: ensure mod_wsgi started
+        apache2_module: state=present name=wsgi
+        notify: restart httpd
+
+    handlers:
+      - name: restart httpd
+        service: name=httpd state=restarted
