@@ -7,3 +7,12 @@
 
      - name : ensure nginx started
        service : name=nginx state=started enabled=yes
+
+     - name: configure nginx
+       template: src=templets/nginx.conf.j2 dest=/etc/nginx/conf.d/myapp.conf mode=0644
+       notify: restart nginx
+
+
+    handlers:
+      - name: restart nginx
+        service: name=nginx state=restarted

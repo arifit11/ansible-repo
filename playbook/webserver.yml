@@ -21,7 +21,7 @@
         notify: restart httpd
 
       - name: copy Apache virtual host config
-        copy: src=demo/demo.conf dest=/etc/httpd/conf.d/sites-available mode=0755
+        copy: src=demo/demo.conf dest=/etc/httpd/conf.d/ mode=0755
         notify: restart httpd
 
       - name: Install virtualenv via pip
@@ -32,6 +32,7 @@
       - name: Setup python env
         pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
         notify: restart httpd
+
 
 
     handlers:
