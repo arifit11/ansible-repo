@@ -13,7 +13,7 @@
   - hosts: database
     become: true
     tasks:
-      - service: name=mariadb state=restarted
+      - service: name=mysqld state=restarted
 
 #Bring stack up
 

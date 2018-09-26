@@ -8,6 +8,8 @@
           - httpd
           - python-pip
           - mod_wsgi
+          
+
 
       - name: ensure web webserver started
         service: name=httpd state=started enabled=yes
