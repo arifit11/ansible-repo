@@ -8,7 +8,8 @@
           - httpd
           - python-pip
           - mod_wsgi
-          
+          - MySQL-python
+
 
 
       - name: ensure web webserver started
