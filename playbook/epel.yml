@@ -4,3 +4,9 @@
     tasks:
      - name : install epl LB
        yum : name=epel-release state=present update_cache=yes
+
+     - name: change selinux config
+       selinux: state=disabled
+
+     - name: change selinux for current time onwards
+       shell: setenforce 0

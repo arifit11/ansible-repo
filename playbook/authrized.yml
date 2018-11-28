@@ -1,0 +1,11 @@
+---
+  - hosts: loadbalancer
+    become: tue
+    tasks:
+      - name: example copying file with owner and permissions
+        copy:
+          src: /Users/arifkhan/.ssh/id_rsa.pub
+          dest: /root/.ssh/authorized_keys
+          owner: root
+          group: root
+          mode: 0600
