@@ -12,54 +12,89 @@
 #  with access, by name, to other vms
 Vagrant.configure(2) do |config|
   config.hostmanager.enabled = true
-
   config.vm.box = "centos/7"
-  
+  ssh_pub_key = File.readlines("/Users/arifkhan/.ssh/id_rsa.pub").first.strip
+
+  # control
   config.vm.define "control", primary: true do |h|
     h.vm.network "private_network", ip: "192.168.135.10"
+    h.vm.provider :virtualbox do |ps|
+      ps.memory = 512
+      ps.name = "vb-control"
+    end
+    h.vm.provision 'shell', inline: 'mkdir -p /root/.ssh'
+    h.vm.provision 'shell', inline: "echo #{ssh_pub_key} > /root/.ssh/authorized_keys"
+    h.vm.provision 'shell', inline: 'chmod 600 /root/.ssh/authorized_keys'
+    h.vm.provision 'shell', inline: 'chmod 700 /root/.ssh'
+    h.vm.provision "ansible" do |ansible|
+      ansible.playbook = "repo/sensu-server.yml"
+      ansible.playbook = "/Users/arifkhan/workspace/ansible/ansible-repo/playbook/jenkins.yml"
 
+    end
   end
-  config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--memory", 1024]
-    
-  end
+
+  # lb01
   config.vm.define "lb01" do |h|
-    
     h.vm.network "private_network", ip: "192.168.135.101"
-    
-  end
-  config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--memory", 512]
-    
+    h.vm.provider :virtualbox do |ps|
+      ps.memory = 512
+      ps.name = "vb-lb01"
+    end
+    h.vm.provision 'shell', inline: 'mkdir -p /root/.ssh'
+    h.vm.provision 'shell', inline: "echo #{ssh_pub_key} > /root/.ssh/authorized_keys"
+    h.vm.provision 'shell', inline: 'chmod 600 /root/.ssh/authorized_keys'
+    h.vm.provision 'shell', inline: 'chmod 700 /root/.ssh'
+    #h.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "repo/sensu-client.yml"
+    #end
   end
 
+  # app01
   config.vm.define "app01" do |h|
-    
     h.vm.network "private_network", ip: "192.168.135.111"
-    
-  end
-  config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--memory", 512]
-    
+    h.vm.provider :virtualbox do |ps|
+      ps.memory = 512
+      ps.name = "vb-app01"
+    end
+    h.vm.provision 'shell', inline: 'mkdir -p /root/.ssh'
+    h.vm.provision 'shell', inline: "echo #{ssh_pub_key} > /root/.ssh/authorized_keys"
+    h.vm.provision 'shell', inline: 'chmod 600 /root/.ssh/authorized_keys'
+    h.vm.provision 'shell', inline: 'chmod 700 /root/.ssh'
+    #h.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "repo/sensu-client.yml"
+    #end
   end
 
+  # app02
   config.vm.define "app02" do |h|
-    
     h.vm.network "private_network", ip: "192.168.135.112"
-    
-  end
-  config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--memory", 512]
-    
+    h.vm.provider :virtualbox do |ps|
+      ps.memory = 512
+      ps.name = "vb-app02"
+    end
+    h.vm.provision 'shell', inline: 'mkdir -p /root/.ssh'
+    h.vm.provision 'shell', inline: "echo #{ssh_pub_key} > /root/.ssh/authorized_keys"
+    h.vm.provision 'shell', inline: 'chmod 600 /root/.ssh/authorized_keys'
+    h.vm.provision 'shell', inline: 'chmod 700 /root/.ssh'
+    #h.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "repo/sensu-client.yml"
+    #end
   end
 
+  # db01
   config.vm.define "db01" do |h|
-    
     h.vm.network "private_network", ip: "192.168.135.121"
-    
-  end
-  config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--memory", 512]
-    
+    h.vm.provider :virtualbox do |ps|
+      ps.memory = 512
+      ps.name = "vb-db01"
+    end
+    h.vm.provision 'shell', inline: 'mkdir -p /root/.ssh'
+    h.vm.provision 'shell', inline: "echo #{ssh_pub_key} > /root/.ssh/authorized_keys"
+    h.vm.provision 'shell', inline: 'chmod 600 /root/.ssh/authorized_keys'
+    h.vm.provision 'shell', inline: 'chmod 700 /root/.ssh'
+    h.vm.provision 'shell', inline: 'hostnamectl set-hostname db01'
+    #h.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "repo/sensu-client.yml"
+    #end
   end
 end
