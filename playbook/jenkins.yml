@@ -1,0 +1,7 @@
+---
+- hosts: control
+  gather_facts: yes
+  become: true
+  roles:
+    - epel
+    - jenkins

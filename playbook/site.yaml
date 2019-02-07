@@ -1,0 +1,4 @@
+---
+  - include: database.yml
+  - include: loadbalenser.yml
+  - include: webserver.yml

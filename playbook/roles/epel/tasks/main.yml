@@ -1,0 +1,6 @@
+---
+- name : install epl
+  yum : name=epel-release state=present update_cache=yes
+
+- name: change selinux config
+  selinux: state=disabled

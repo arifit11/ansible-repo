@@ -1,2 +1,26 @@
 ---
-# tasks file for demo_app
+- name: Install web-server
+  yum: name={{item}} state=present update_cache=yes
+  with_items:
+    - httpd
+    - python-pip
+    - python-virtualenv
+    - MySQL-python
+
+
+- name: copy demo app source
+  copy: src=demo/app/ dest=/var/www/demo mode=0755
+  notify: restart httpd
+
+- name: copy Apache virtual host config
+  copy: src=demo/demo.conf dest=/etc/httpd/conf.d/ mode=0755
+  notify: restart httpd
+
+- name: Install virtualenv via pip
+  pip:
+    name: virtualenv
+    executable: pip
+
+- name: Setup python env
+  pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
+  notify: restart httpd

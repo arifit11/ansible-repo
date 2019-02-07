@@ -1,2 +1,10 @@
 ---
-# tasks file for nginx
+- name : install nginx LB
+  yum : name=nginx state=present update_cache=yes
+
+- name: configure nginx
+  template: src=nginx.conf.j2 dest=/etc/nginx/conf.d/myapp.conf mode=0644
+  notify: restart nginx
+
+- name : ensure nginx started
+  service : name=nginx state=started enabled=yes

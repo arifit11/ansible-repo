@@ -1,0 +1,16 @@
+---
+- name: copy Jenkins repo
+  copy: src=jenkins.repo dest=/etc/yum.repos.d/jenkins.repo mode=766
+
+- rpm_key:
+    state: present
+    key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+
+- name : install Jenkins
+  yum : name=jenkins state=present update_cache=yes
+
+- name : install JAVA
+  yum : name=java state=present update_cache=yes
+
+- name: ensure jenkins started
+  service: name=jenkins state=started enabled=yes

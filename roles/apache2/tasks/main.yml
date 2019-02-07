@@ -1,2 +1,15 @@
 ---
-# tasks file for apache2
+- name: Install web-server
+  yum: name={{item}} state=present update_cache=yes
+  with_items:
+    - httpd
+    - python-pip
+    - mod_wsgi
+    - MySQL-python
+
+- name: ensure web webserver started
+  service: name=httpd state=started enabled=yes
+
+- name: ensure mod_wsgi started
+  apache2_module: state=present name=wsgi
+  notify: restart httpd

@@ -1,2 +1,3 @@
 ---
-# handlers file for demo_app
+- name: restart httpd
+  service: name=httpd state=restarted
