@@ -1,0 +1,38 @@
+---
+- hosts: "127.0.0.1"
+  become: false
+  gather_facts: yes
+
+  tasks:
+  - name: create a security group in us-east-1
+    ec2_group:
+          name: mydmz
+          description: an example ec2 group
+          region: ap-south-1
+          aws_access_key: "AKIAIH4Q2BWMJ6LTZV7Q"
+          aws_secret_key: "z9IqCaA/0F9qwouIcDqexk8m10iUijdN9IUeDdEn"
+          rules:
+            - proto: tcp
+              from_port: 80
+              to_port: 80
+              cidr_ip: 0.0.0.0/0
+    register: security_group
+
+  #- debug:
+      #var: security_group
+      #verbosity: 2
+
+  #- name: shell
+    #shell: echo {{security_group.group_id }}
+
+  - name: launch EC2
+    ec2:
+      key_name: mybuildboxkey
+      instance_type: t2.micro
+      image: ami-5b673c34
+      wait: yes
+      group_id: "{{ security_group.group_id }}"
+      count: 1
+      region: ap-south-1
+      count_tag:
+         Name: mybuildboxkey

@@ -1,0 +1,12 @@
+---
+- name: install redis
+  yum: name=redis state=present
+
+- name: change localhost line to bind to all interface
+  lineinfile:
+    path: /etc/redis.conf
+    regexp: '^bind'
+    line: 'bind 0.0.0.0'
+
+- name: enable and restart the service
+  service: name=redis state=restarted enabled=true

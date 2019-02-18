@@ -1,0 +1,7 @@
+{
+  "client": {
+    "name": "{{pl_hostname.stdout}}",
+    "address": "{{inventory_hostname}}",
+    "subscriptions": ["all", "{{pl_hostname.stdout}}"]
+  }
+}

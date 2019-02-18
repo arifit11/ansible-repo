@@ -1,0 +1,21 @@
+---
+- name: install sensu server
+  yum: name=sensu state=present
+
+- name: install uchiwa
+  yum: name=uchiwa state=present
+
+- name: copy sensu config file
+  copy: src=files/config.json dest=/etc/sensu/config.json
+
+- name: copy uchiwa config file
+  copy: src=uchiwa.json dest=/etc/sensu/uchiwa.json
+
+- name: start api service
+  service: name=sensu-api state=restarted enabled=yes
+
+- name: start sensu server
+  service: name=sensu-server state=restarted enabled=yes
+
+- name: start uchiwa
+  service: name=uchiwa state=restarted enabled=yes

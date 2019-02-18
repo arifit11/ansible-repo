@@ -1,0 +1,30 @@
+---
+- hosts: control
+  become: true
+  tasks:
+    - name: set hostname
+      command: hostnamectl set-hostname control
+
+- hosts: loadbalancer
+  become: true
+  tasks:
+    - name: set hostname
+      command: hostnamectl set-hostname lb01
+
+- hosts: app01
+  become: true
+  tasks:
+    - name: set hostname
+      command: hostnamectl set-hostname app01
+
+- hosts: app02
+  become: true
+  tasks:
+    - name: set hostname
+      command: hostnamectl set-hostname app01
+
+- hosts: database
+  become: true
+  tasks:
+    - name: set hostname
+      command: hostnamectl set-hostname db01

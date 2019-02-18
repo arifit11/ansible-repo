@@ -1,0 +1,9 @@
+---
+- hosts: control
+  gather_facts: yes
+  become: yes
+
+  roles:
+    - roles/base
+    - {role: "roles/sensu-server"}
+    - {role: "roles/jenkins"}

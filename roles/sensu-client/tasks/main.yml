@@ -1,0 +1,16 @@
+---
+- name: install sensu package
+  yum: name=sensu state=present
+
+- name: copy sensu client config file
+  copy: src=config.json dest=/etc/sensu/client.config
+
+- name: find current hostname
+  shell: hostname
+  register: pl_hostname
+
+- name: copy client config file
+  template: src=client.json dest=/etc/sensu/conf.d/client.json
+
+- name: restart sensu client
+  service: name=sensu-client state=restarted enabled=yes

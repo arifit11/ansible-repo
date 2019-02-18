@@ -1,0 +1,12 @@
+---
+- name: install epel
+  yum: name=epel-release state=present
+
+- name: configre sensu repo files
+  copy: src=sensu.repo dest=/etc/yum.repos.d/sensu.repo
+
+#- name: change selinux config
+#  selinux: state=disabled
+#
+#- name: change selinux for current time onwards
+  #shell: setenforce 0
