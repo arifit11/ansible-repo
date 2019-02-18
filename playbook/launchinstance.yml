@@ -9,8 +9,8 @@
           name: mydmz
           description: an example ec2 group
           region: ap-south-1
-          aws_access_key: "AKIAIH4Q2BWMJ6LTZV7Q"
-          aws_secret_key: "z9IqCaA/0F9qwouIcDqexk8m10iUijdN9IUeDdEn"
+          aws_access_key: "*****"
+          aws_secret_key: "****"
           rules:
             - proto: tcp
               from_port: 80
