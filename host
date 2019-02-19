@@ -9,4 +9,4 @@ app02
 db01
 
 [control-1]
-control
+control ansible_connection=local
