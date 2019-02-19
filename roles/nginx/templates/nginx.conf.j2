@@ -1,4 +1,4 @@
-upstream demo {
+http {
 {% for server in groups.webserver %}
     server {{ server }};
 {% endfor %}
