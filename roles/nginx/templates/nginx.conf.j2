@@ -1,4 +1,3 @@
-http {
 upstream demo {
 {% for server in groups.webserver %}
     server {{ server }};
@@ -12,6 +11,5 @@ server {
     location / {
         proxy_pass http://demo/;
     }
-}
 }
 
