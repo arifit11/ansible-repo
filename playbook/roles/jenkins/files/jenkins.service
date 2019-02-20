@@ -1,0 +1,11 @@
+[Unit]
+Description=Jenkins Daemon
+Requires=network.target
+
+[Service]
+Environment=JENKINS_HOME=/root/work
+ExecStart=/bin/java -jar /usr/lib/jenkins/jenkins.war --prefix=/jenkins
+User=root
+
+[Install]
+WantedBy=multi-user.target

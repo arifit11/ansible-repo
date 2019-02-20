@@ -2,6 +2,9 @@
 - name: copy Jenkins repo
   copy: src=jenkins.repo dest=/etc/yum.repos.d/jenkins.repo mode=766
 
+- name: copy Jenkins Service
+  copy: src=jenkins.service dest=/usr/lib/systemd/system/jenkins.service mode=766
+
 - rpm_key:
     state: present
     key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
