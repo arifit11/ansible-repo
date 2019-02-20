@@ -1,0 +1,7 @@
+---
+# Disable SELinux
+- selinux:
+    state: disabled
+
+- name: configure nginx
+  template: src=config dest=/etc/selinux/config

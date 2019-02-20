@@ -1,0 +1,5 @@
+---
+  - hosts: all
+    become: tue
+    roles:
+      - roles/selinux
