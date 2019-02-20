@@ -1,7 +1,7 @@
+http {
 upstream demo {
-{% for server in groups.webserver %}
-    server {{ server }};
-{% endfor %}
+    server app01;
+    server app02;
 }
 
 server {
@@ -12,4 +12,8 @@ server {
         proxy_pass http://demo/;
     }
 }
+}
 
+events {
+    worker_connections 1024;
+}
