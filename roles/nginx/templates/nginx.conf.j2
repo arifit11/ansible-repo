@@ -1,7 +1,8 @@
 http {
-upstream demo {
-    server app01;
-    server app02;
+upstream demo  {
+{% for server in groups.webserver %}
+    server {{ server }};
+{% endfor %}
 }
 
 server {
